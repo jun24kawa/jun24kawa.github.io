@@ -8,40 +8,60 @@
 <style>
 :root{
   --bg:#fbfbf9; --fg:#1b1b1b; --muted:#6b6b6b; --rule:#e2e0da;
-  --link:#8a4b2f; --draft-bg:#fff4e5; --draft-fg:#8a5a1a; --draft-bd:#f0d9b5; --card:#fff;
+  --link:#8a4b2f; --link-strong:#6e3a22; --draft-bg:#fff4e5; --draft-fg:#8a5a1a; --draft-bd:#f0d9b5; --card:#fff;
+  --shadow:0 1px 2px rgba(30,20,10,.04), 0 2px 10px rgba(30,20,10,.05);
+  --shadow-hover:0 2px 4px rgba(30,20,10,.06), 0 8px 20px rgba(30,20,10,.09);
 }
 @media (prefers-color-scheme: dark){
   :root{
     --bg:#1a1a19; --fg:#e6e4df; --muted:#9a978f; --rule:#38352f;
-    --link:#e0a982; --draft-bg:#2c2416; --draft-fg:#e8c895; --draft-bd:#4a3c22; --card:#232220;
+    --link:#e0a982; --link-strong:#eec3a3; --draft-bg:#2c2416; --draft-fg:#e8c895; --draft-bd:#4a3c22; --card:#232220;
+    --shadow:0 1px 2px rgba(0,0,0,.25), 0 2px 10px rgba(0,0,0,.2);
+    --shadow-hover:0 2px 4px rgba(0,0,0,.3), 0 10px 24px rgba(0,0,0,.28);
   }
 }
 *{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
 body{
   margin:0; background:var(--bg); color:var(--fg);
   font-family:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
   line-height:1.9; font-size:17px;
 }
-.wrap{max-width:42em; margin:0 auto; padding:3rem 1.3rem 6rem;}
-h1{font-size:1.6rem; margin:0 0 .4rem;}
-.lead{color:var(--muted); margin:0 0 2.4rem;}
+.wrap{max-width:42em; margin:0 auto; padding:3.2rem 1.3rem 6rem;}
+h1{font-size:1.7rem; margin:0 0 .5rem; font-weight:700; letter-spacing:.02em;}
+.lead{color:var(--muted); margin:0 0 2.8rem; font-size:1.02rem;}
+h2.section-title{font-size:1.05rem; font-weight:700; margin:0 0 1.1rem; color:var(--muted); letter-spacing:.04em;}
 .book{
   display:block; text-decoration:none; color:inherit;
-  border:1px solid var(--rule); border-radius:10px; padding:1.2rem 1.3rem;
-  margin:0 0 1.2rem; background:var(--card);
+  border:1px solid var(--rule); border-radius:12px; padding:1.3rem 1.4rem;
+  margin:0 0 1.1rem; background:var(--card); box-shadow:var(--shadow);
+  transition:box-shadow .18s ease, transform .18s ease, border-color .18s ease;
 }
-.book:hover{border-color:var(--link);}
-.book .t{font-size:1.12rem; font-weight:700; margin-bottom:.3rem;}
-.book .s{color:var(--muted); font-size:.95rem;}
+.book:hover{border-color:var(--link); box-shadow:var(--shadow-hover); transform:translateY(-1px);}
+.book .t{font-size:1.14rem; font-weight:700; margin-bottom:.35rem; line-height:1.5;}
+.book .s{color:var(--muted); font-size:.94rem; line-height:1.7;}
 .tag{
-  display:inline-block; font-size:.78rem; background:var(--draft-bg); color:var(--draft-fg);
-  border:1px solid var(--draft-bd); border-radius:5px; padding:.05rem .5rem; margin-left:.5rem; vertical-align:middle;
+  display:inline-block; font-size:.75rem; background:var(--draft-bg); color:var(--draft-fg);
+  border:1px solid var(--draft-bd); border-radius:5px; padding:.08rem .55rem; margin-left:.5rem; vertical-align:middle;
+  font-weight:700; letter-spacing:.02em;
 }
-.note{color:var(--muted); font-size:.86rem; margin-top:3rem; border-top:1px solid var(--rule); padding-top:1rem;}
-a{color:var(--link);}
-.about{margin:0 0 2.6rem;}
-.about h2{font-size:1.12rem; font-weight:700; margin:0 0 .9rem;}
+.note{color:var(--muted); font-size:.86rem; margin-top:2.4rem; border-top:1px solid var(--rule); padding-top:1.2rem;}
+a{color:var(--link); text-underline-offset:.15em;}
+a:hover{color:var(--link-strong);}
+.about{margin:0 0 3rem; background:var(--card); border:1px solid var(--rule); border-radius:12px; box-shadow:var(--shadow); padding:1.5rem 1.6rem;}
+.about h2{font-size:1.08rem; font-weight:700; margin:0 0 1rem;}
 .about p{margin:0 0 1rem; text-align:justify;}
+.about p:last-child{margin-bottom:0;}
+.feedback-cta{
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  background:var(--card); border:1px solid var(--rule); border-radius:12px; box-shadow:var(--shadow);
+  padding:1.2rem 1.4rem; margin-top:2.6rem; text-decoration:none; color:inherit;
+  transition:box-shadow .18s ease, border-color .18s ease;
+}
+.feedback-cta:hover{border-color:var(--link); box-shadow:var(--shadow-hover);}
+.feedback-cta .t{font-weight:700; font-size:1.02rem;}
+.feedback-cta .s{color:var(--muted); font-size:.88rem; margin-top:.2rem;}
+.feedback-cta .arrow{color:var(--link); font-size:1.3rem; flex-shrink:0;}
 </style>
 </head>
 <body>
@@ -60,37 +80,44 @@ a{color:var(--link);}
   <p>本書に対するご意見・ご感想、また、新たな本のご提案があれば本ページ最後のご意見箱からお願いします。</p>
 </section>
 
+<h2 class="section-title">本の一覧</h2>
+
 <a class="book" href="books/ichinin-mo-misutenai/">
   <div class="t">「一人も見捨てない」は、得です。<span class="tag">下書き版</span></div>
-  <div class="s">──教育・投資・防災を貫く一本の戦略。推敲の途中です（v19・2026年9月時点）。</div>
+  <div class="s">──教育・投資・防災を貫く一本の戦略。推敲の途中です（v23・2026年9月時点）。</div>
 </a>
 
 <a class="book" href="books/ai-to-kunde-tokusuru/">
   <div class="t">AI時代に、AIと組んで得をする<span class="tag">下書き版</span></div>
-  <div class="s">──五つの力とその高め方。前著の続編。推敲の途中です（v28・2026年9月時点）。</div>
+  <div class="s">──五つの力とその高め方。前著の続編。推敲の途中です（v33・2026年9月時点）。</div>
 </a>
 
 <a class="book" href="books/mada-yamenakute-ii/">
   <div class="t">まだ、辞めなくていい。<span class="tag">下書き版</span></div>
-  <div class="s">──次の時代を生き延びる教師の戦略。推敲の途中です（v07・2026年9月時点）。</div>
+  <div class="s">──次の時代を生き延びる教師の戦略。推敲の途中です（v13・2026年9月時点）。</div>
 </a>
 
 <a class="book" href="books/makegumi-janai/">
   <div class="t">非1条校を選ぶ君は、負け組じゃない。<span class="tag">下書き版</span></div>
-  <div class="s">──これからの時代を生き抜く子どものための本。推敲の途中です（v04・2026年9月時点）。</div>
+  <div class="s">──これからの時代を生き抜く子どものための本。推敲の途中です（v07・2026年9月時点）。</div>
 </a>
 
 <a class="book" href="books/owari-janai/">
   <div class="t">定年後、辞められない時代の生き残り本<span class="tag">下書き版</span></div>
-  <div class="s">──退職後の生き方の設計図。推敲の途中です（v01・2026年9月時点）。</div>
+  <div class="s">──退職後の生き方の設計図。推敲の途中です（v03・2026年9月時点）。</div>
+</a>
+
+<a class="feedback-cta" href="feedback/">
+  <span>
+    <span class="t">ご意見箱</span><br>
+    <span class="s">ご感想・ご意見、新しい本のご提案はこちらから</span>
+  </span>
+  <span class="arrow">→</span>
 </a>
 
 <p class="note">
   このサイトはまだ準備中です。掲載しているものは下書きで、内容・数値・表現は今後変わります。
   引用・転載・紹介はお控えください。
-</p>
-<p class="note" style="margin-top:1rem; border-top:none; padding-top:0;">
-  <a href="feedback/">ご感想・ご意見はこちら（ご意見箱）</a>
 </p>
 </div>
 </body>
